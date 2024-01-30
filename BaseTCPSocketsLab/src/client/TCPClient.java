@@ -1,6 +1,7 @@
 package client;
 
 import server.AddressBook;
+import java.util.concurrent.ThreadLocalRandom;
 
 import java.net.*;
 import java.io.*;
@@ -18,7 +19,11 @@ public class TCPClient {
         return resp;
     }
 
-    public static void main(String[] args) {
+    //
+
+//    public static void main(String[] args)
+    public static void enviaClientes(int n)
+    {
         Socket s = null;
         try {
             int serverPort = 49152;
@@ -28,12 +33,23 @@ public class TCPClient {
             DataInputStream in = new DataInputStream(s.getInputStream());
             DataOutputStream out = new DataOutputStream(s.getOutputStream());
             AddressBook addressBook = new AddressBook();
-        
+            ClientThread hilo1 = new ClientThread();
 
-            out.writeUTF("Hello");
+            for(int i=0; i<10; i++) {
+                int randomNum = ThreadLocalRandom.current().nextInt(0, 4 + 1);
+                String numero = String.valueOf(randomNum);
+//                String numero = String.valueOf(1);
+                out.writeUTF(numero);
 
-            String data = in.readUTF();
-            System.out.println("Received: " + data);
+                String data = in.readUTF();
+                System.out.println("Received: " + data);
+
+            }
+            String numFinal = String.valueOf(-1);
+            out.writeUTF(numFinal);
+
+
+
 
         } catch (UnknownHostException e) {
             System.out.println("Sock:" + e.getMessage());

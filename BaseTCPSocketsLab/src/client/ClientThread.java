@@ -1,11 +1,18 @@
 package client;
 
-public class ClientThread {
+import server.Person;
 
-    public void hilosCliente() {
-        for (int i = 0; i < 5; i++) {
+public class ClientThread extends Thread {
+
+    public ClientThread() {
             Person persona = new Person();
-        }
+    }
+
+    public void run() {
+
+        TCPClient cliente = new TCPClient();
+        cliente.enviaClientes(10);
+
     }
 
 

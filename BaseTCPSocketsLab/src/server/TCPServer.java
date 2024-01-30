@@ -44,14 +44,17 @@ class Connection extends Thread {
     @Override
     public void run() {
         try {
-            // an echo server
-            int key = Integer.parseInt(in.readUTF());         // recibo solicitud
+            //while solivitud != -1
+            int key = Integer.parseInt(in.readUTF()); // recibo solicitud
+            while(key!=-1){
 
-            System.out.println("Message received from: " + clientSocket.getRemoteSocketAddress());
-            AddressBook addressBook = new AddressBook();
-            String nombre = addressBook.getRecord(key).getName();
-            //out.writeUTF(data);                // envio respuesta
-            out.writeUTF(nombre);
+
+                System.out.println("Message received from: " + clientSocket.getRemoteSocketAddress());
+                AddressBook addressBook = new AddressBook();
+                String nombre = addressBook.getRecord(key).getName();
+                //out.writeUTF(data);                // envio respuesta
+                out.writeUTF(nombre);
+            }
         } catch (EOFException e) {
             System.out.println("EOF:" + e.getMessage());
         } catch (IOException e) {
