@@ -11,7 +11,7 @@ public class ClientThread extends Thread {
     public void run() {
 
         TCPClient cliente = new TCPClient();
-        cliente.enviaClientes(10);
+        cliente.enviaClientes(2);
 
     }
 

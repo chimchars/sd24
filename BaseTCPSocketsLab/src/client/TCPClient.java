@@ -35,10 +35,12 @@ public class TCPClient {
             AddressBook addressBook = new AddressBook();
             ClientThread hilo1 = new ClientThread();
 
-            for(int i=0; i<10; i++) {
+
+            //numero de solicitudes. 1 hilo = 1 cliente (en launcher)
+            for(int i=0; i<n; i++) {
                 int randomNum = ThreadLocalRandom.current().nextInt(0, 4 + 1);
                 String numero = String.valueOf(randomNum);
-//                String numero = String.valueOf(1);
+//                String numero = String.valueOf(1); //para probar si regresa el mismo usuario
                 out.writeUTF(numero);
 
                 String data = in.readUTF();

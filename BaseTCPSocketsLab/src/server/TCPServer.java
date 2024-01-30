@@ -46,8 +46,9 @@ class Connection extends Thread {
         try {
             //while solivitud != -1
             int key = Integer.parseInt(in.readUTF()); // recibo solicitud
-            while(key!=-1){
+            long startTime = System.nanoTime();
 
+            while(key!=-1){
 
                 System.out.println("Message received from: " + clientSocket.getRemoteSocketAddress());
                 AddressBook addressBook = new AddressBook();
@@ -55,6 +56,9 @@ class Connection extends Thread {
                 //out.writeUTF(data);                // envio respuesta
                 out.writeUTF(nombre);
             }
+            long estimatedTime = System.nanoTime() - startTime;
+            String tiempoRespuestas = String.valueOf(estimatedTime);
+            System.out.println("Tiempo transcurrido:" + tiempoRespuestas);
         } catch (EOFException e) {
             System.out.println("EOF:" + e.getMessage());
         } catch (IOException e) {
