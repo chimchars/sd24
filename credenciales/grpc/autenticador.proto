@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package autenticador;
+
+service Autenticador {
+    rpc autenticar (HelloRequest) returns (HelloReply) {}
+
+}
+/*codigo para compilar: 
+python -m grpc_tools.protoc -I. --python_out=. --pyi_out=. --grpc_python_out=. ./autenticador.proto
+*/
+message HelloRequest {
+    //optional, required o repeated
+    optional string name = 1; //primer elemento aunque solo haya uno
+    optional string lugarNacimiento = 2;
+    optional int32 anoNacimiento = 3;
+    optional string contrasena = 4;
+}
+
+message HelloReply {
+    optional string message = 1;
+    optional bool status = 2;
+    
+}
